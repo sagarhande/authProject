@@ -9,6 +9,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
+from django.views.decorators.csrf import csrf_protect
 
 
 def login(request):
@@ -56,6 +57,7 @@ def about(request):
     return render(request, "about.html")
 
 
+@csrf_protect
 def signup(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
@@ -92,7 +94,14 @@ def signup(request):
                 )
             return redirect("login")
         else:
-            messages.error(request, form.errors["__all__"][0])
+            error = form.errors.get("__all__", [""])[0]
+            error = (
+                error + " & " + form.errors.get("email", [""])[0]
+                if form.errors.get("email", [""])[0]
+                else error
+            )
+
+            messages.error(request, error)
             form = RegistrationForm()
             return render(request, "signup.html", {"form": form})
     else:
