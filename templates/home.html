@@ -1,1 +1,44 @@
-HOME
+{% extends 'base.html' %}
+
+{% block title %}
+Home - SparkCart
+{% endblock %}
+{% block content %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 0px;
+        }
+        .button {
+            background-color: #0056b3; /* Darker blue for the button */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 2px;
+            cursor: pointer;
+        }
+        .message {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+
+    <h1>Welcome to SparkCart!</h1>
+
+    {% include 'alerts.html' %}
+
+    <p>Find everything you need with the click of a button!</p>
+    <a href="{% url 'signup' %}" class="button">SignUp</a>
+    <a href="{% url 'login' %}" class="button">SignIn</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'about' %}" class="button">About Page</a>
+    {% else %}
+        <a href="{% url 'login' %}" class="button" onclick="alert('Please login first to access the About page.');">About Page</a>
+    {% endif %}
+{% endblock %}

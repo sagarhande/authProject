@@ -1,39 +1,86 @@
+{% extends 'base.html' %}
 
+{% block title %}
+SignIn - SparkCart
+{% endblock %}
 
-<section class="section-conten padding-y" style="min-height:84vh">
+{% block content %}
+<style>
+    /* Login Form Styles */
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 0px;
+    }
 
-<!-- ============================ COMPONENT LOGIN   ================================= -->
+    .login-form-container {
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        display: inline-block;
+        width: 300px; /* Adjust width for better layout */
+        background-color: #fff;
+        border-radius: 8px; /* Add some rounding to the form */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for better appearance */
+    }
 
-{% if request.GET.command == 'verification' %}
+    .login-form-container input[type="email"],
+    .login-form-container input[type="password"] {
+        width: 90%; /* Slight margin on the sides */
+        padding: 10px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        border-radius: 4px; /* Rounded input fields */
+    }
 
-<div class="container mx-auto alert alert-info text-center" role="alert" style="max-width: 1024px; margin-top:100px;">
-Thank you for registering with us. We have sent you a verification email to your email address [{{ request.GET.email }}]
-<br><br>
-Already verified? <a href="{% url 'login' %}">Login</a>
-</div>
+    .login-form-container button {
+        background-color: #0056b3; /* Darker blue for the button */
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 90%;
+        border-radius: 4px; /* Rounded button */
+    }
 
+    .login-form-container a {
+        color: dodgerblue;
+        text-decoration: none;
+    }
+
+    .login-form-container a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+    {% include 'alerts.html' %}
+
+{% if user.is_authenticated %}
+    <!-- Display message when user is logged in -->
+    <div class="login-form-container">
+        <p>You are logged in as <strong>{{ user.email }}</strong>.</p>
+        <p>You can see the about page</p>
+    </div>
 {% else %}
-
-	<div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
-
-      <div class="card-body">
-      <h4 class="card-title mb-4">Sign in</h4>
-      <form action="{% url 'login' %}" method="POST">
-        {% csrf_token %}
-          <div class="form-group">
-			 <input type="email" class="form-control" placeholder="Email Address" name="email">
-          </div> <!-- form-group// -->
-          <div class="form-group">
-			<input type="password" class="form-control" placeholder="Password" name="password">
-          </div> <!-- form-group// -->
-          <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block"> Login  </button>
-          </div> <!-- form-group// -->
-      </form>
-      </div> <!-- card-body.// -->
-    </div> <!-- card .// -->
-
-     <p class="text-center mt-4">Don't have account? <a href="{% url 'signup' %}">Sign up</a></p>
-     <br><br>
-<!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+    <!-- Show login form when user is not logged in -->
+    <h2>Login to SparkCart</h2>
+    <div class="login-form-container">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div>
+                <input type="email" placeholder="Enter Email" name="email" required>
+            </div>
+            <div>
+                <input type="password" placeholder="Enter Password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+            <div>
+                <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+            </div>
+        </form>
+    </div>
 {% endif %}
+{% endblock %}

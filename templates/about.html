@@ -1,11 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>About</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1>About</h1>
-</body>
-</html>
+{% block title %}
+About Us - SparkCart
+{% endblock %}
+
+{% block content %}
+<style>
+    /* About Page Styles */
+    .about-container {
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+        margin: 30px auto;
+    }
+
+    .about-container h1 {
+        font-size: 2.5em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .about-container h2 {
+        font-size: 1.8em;
+        color: #0056b3;
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+
+    .about-container p {
+        font-size: 1.1em;
+        line-height: 1.8;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .about-container ul {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .about-container ul li {
+        font-size: 1.1em;
+        line-height: 1.8;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .about-container a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .about-container a:hover {
+        text-decoration: underline;
+    }
+            .content {
+            flex: 1; /* Takes available space */
+            padding: 150px;
+            max-width: 800px;
+            margin: -100px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+</style>
+
+<div class="about-container">
+
+        {% include 'alerts.html' %}
+
+
+    <h1>About SparkCart</h1>
+    <p>Welcome to SparkCart! We are a dedicated team of professionals committed to bringing you the best shopping experience possible. Our mission is to provide a seamless and enjoyable shopping experience, with a wide range of products that cater to all your needs.</p>
+
+    <h2>Our Journey</h2>
+    <p>Founded in 2020, SparkCart started as a small startup with a vision to revolutionize online shopping. Over the years, we have grown significantly, thanks to our loyal customers and dedicated team. Today, we are proud to serve thousands of happy customers every day, offering an extensive range of products from electronics to fashion, home goods to groceries.</p>
+
+    <h2>Our Values</h2>
+    <p>At SparkCart, we believe in customer satisfaction, quality service, and continuous innovation. We strive to create a platform that not only meets but exceeds our customers' expectations. Our core values are:</p>
+    <ul>
+        <li><strong>Customer First:</strong> We put our customers at the heart of everything we do.</li>
+        <li><strong>Quality Products:</strong> We are committed to providing high-quality products at competitive prices.</li>
+        <li><strong>Innovation:</strong> We constantly innovate to bring new features and enhance the shopping experience.</li>
+        <li><strong>Integrity:</strong> We believe in building trust through transparency and ethical practices.</li>
+    </ul>
+
+    <h2>Contact Us</h2>
+    <p>If you have any questions, feedback, or suggestions, feel free to reach out to us at <a href="mailto:info@sparkcart.io">info@sparkcart.io</a>. We would love to hear from you!</p>
+</div>
+{% endblock %}
