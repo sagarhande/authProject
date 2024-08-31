@@ -66,11 +66,11 @@ TEMPLATES = [
         },
     },
 ]
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "static"
-STATICFILES_DIRS = [
-    "auth_project/static",
-]
+# STATIC_URL = "/static/"
+# STATIC_ROOT = BASE_DIR / "static"
+# STATICFILES_DIRS = [
+#     "auth_project/static",
+# ]
 WSGI_APPLICATION = "auth_project.wsgi.application"
 
 AUTH_USER_MODEL = "accounts.Account"
